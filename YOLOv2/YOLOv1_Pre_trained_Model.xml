@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<Filters>
+    <Filter name="W01">
+        <bias>"B01"</bias>
+        <dimensions>7</dimensions>
+        <stride>2</stride>
+        <input>3</input>
+        <output>64</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W02">
+        <bias>"B02"</bias>
+        <dimensions>3</dimensions>
+        <stride>1</stride>
+        <input>64</input>
+        <output>192</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W03">
+        <bias>"B03"</bias>
+        <dimensions>1</dimensions>
+        <stride>1</stride>
+        <input>192</input>
+        <output>128</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W04">
+        <bias>"B04"</bias>
+        <dimensions>3</dimensions>
+        <stride>1</stride>
+        <input>128</input>
+        <output>256</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W05">
+        <bias>"B05"</bias>
+        <dimensions>1</dimensions>
+        <stride>1</stride>
+        <input>256</input>
+        <output>256</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W06">
+        <bias>"B06"</bias>
+        <dimensions>3</dimensions>
+        <stride>1</stride>
+        <input>256</input>
+        <output>512</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W07">
+        <bias>"B07"</bias>
+        <dimensions>1</dimensions>
+        <stride>1</stride>
+        <input>512</input>
+        <output>256</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W08">
+        <bias>"B08"</bias>
+        <dimensions>3</dimensions>
+        <stride>1</stride>
+        <input>256</input>
+        <output>512</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W09">
+        <bias>"B09"</bias>
+        <dimensions>1</dimensions>
+        <stride>1</stride>
+        <input>512</input>
+        <output>256</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W10">
+        <bias>"B10"</bias>
+        <dimensions>3</dimensions>
+        <stride>1</stride>
+        <input>256</input>
+        <output>512</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W11">
+        <bias>"B11"</bias>
+        <dimensions>1</dimensions>
+        <stride>1</stride>
+        <input>512</input>
+        <output>256</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W12">
+        <bias>"B12"</bias>
+        <dimensions>3</dimensions>
+        <stride>1</stride>
+        <input>256</input>
+        <output>512</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W13">
+        <bias>"B13"</bias>
+        <dimensions>1</dimensions>
+        <stride>1</stride>
+        <input>512</input>
+        <output>256</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W14">
+        <bias>"B14"</bias>
+        <dimensions>3</dimensions>
+        <stride>1</stride>
+        <input>256</input>
+        <output>512</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W15">
+        <bias>"B15"</bias>
+        <dimensions>1</dimensions>
+        <stride>1</stride>
+        <input>512</input>
+        <output>512</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W16">
+        <bias>"B16"</bias>
+        <dimensions>3</dimensions>
+        <stride>1</stride>
+        <input>512</input>
+        <output>1024</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W17">
+        <bias>"B17"</bias>
+        <dimensions>1</dimensions>
+        <stride>1</stride>
+        <input>1024</input>
+        <output>512</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W18">
+        <bias>"B18"</bias>
+        <dimensions>3</dimensions>
+        <stride>1</stride>
+        <input>512</input>
+        <output>1024</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W19">
+        <bias>"B19"</bias>
+        <dimensions>1</dimensions>
+        <stride>1</stride>
+        <input>1024</input>
+        <output>512</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+    <Filter name="W20">
+        <bias>"B20"</bias>
+        <dimensions>3</dimensions>
+        <stride>1</stride>
+        <input>512</input>
+        <output>1024</output>
+        <padding>VALID</padding>
+        <pretrained>YES</pretrained>
+    </Filter>
+<Filters>
