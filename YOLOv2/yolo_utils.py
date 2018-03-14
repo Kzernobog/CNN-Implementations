@@ -29,8 +29,8 @@ def initialize_weights(xml_file):
         print(size)
         W = tf.get_variable(child.attrib['name'], size, initializer = tf.contrib.layers.xavier_initializer(seed = 0)) 
         parameters[child.attrib['name']] = W
-        B = tf.Variable(tf.constant(0.01, shape=[size[-1]]))
-        parameters['B'+(child.attrib['name'][1:])] = B
+        B = tf.get_variable('b'+(child.attrib['name'][1:]), [size[-1],1], initializer = tf.zeros_initializer())
+        parameters['b'+(child.attrib['name'][1:])] = B
         
     return parameters
 
