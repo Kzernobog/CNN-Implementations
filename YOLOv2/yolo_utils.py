@@ -73,3 +73,51 @@ def random_mini_batches(X, Y, mini_batch_size = 64, seed = 0):
         mini_batches.append(mini_batch)
     
     return mini_batches
+
+
+def conv_layer(A_p, W, B, strides=[1,1,1,1], padding="SAME", name="default", activation='relu'):
+    '''
+    A_p = activation of the previous layer
+    W = Filter to convolve
+    B = bias term
+    acitvation = type of activation
+    '''
+    #tf.name_scope creates namespace for operators in the default graph, places into group, easier to read
+    with tf.name_scope('conv_'+name):
+        conv = tf.nn.conv2d(A_p, W, strides=strides, padding=padding)
+
+        if (activation == 'relu'):
+            act = tf.nn.relu(tf.nn.bias_add(conv, B))
+        elif (activation == 'leaky_relu'):
+            act = tf.nn.leaky_relu(tf.nn.bias_add(conv, B))
+
+
+        #visualize the the distribution of weights, biases and activations
+        tf.summary.histogram("weights", W)
+        tf.summary.histogram("biases", B)
+        tf.summary.histogram("activations", act)
+        #return tf.nn.max_pool(act, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding="SAME")
+    return act
+ 
+
+
+def fc_layer(A_p, output_num, activation_fn=None, name="default"):
+    """
+    A_p = activations of the previous layer
+    output_num = number of neurons in the fully connected layer
+    """
+    with tf.name_scope("fc_"+name):
+        #fully connected part
+        FC1 = tf.contrib.layers.fully_connected(A_p, ouput_num, activation_fn=activation_fn)
+        
+    return FC1
+
+def max_pool(A_p, kernel, strides, padding="SAME", name="default"):
+    """
+    A_p = activation of the previous layer
+    kernel = size of the filter
+    strides = strides of the pooling filter
+    """
+    with tf.name_scope("pool_"+name):
+        P = tf.nn.max_pool(A_P, kernel, strides, padding=padding)
+    return P
