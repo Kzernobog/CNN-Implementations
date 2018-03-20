@@ -26,13 +26,16 @@ def initialize_weights(xml_file):
                 size.append((int)(child1.text))
             if (child1.tag == 'output'):
                 size.append((int)(child1.text))
-        print(size)
+        
         W = tf.get_variable(child.attrib['name'], size, initializer = tf.contrib.layers.xavier_initializer(seed = 0)) 
         parameters[child.attrib['name']] = W
         B = tf.get_variable('b'+(child.attrib['name'][1:]), [size[-1],1], initializer = tf.zeros_initializer())
         parameters['b'+(child.attrib['name'][1:])] = B
+        print(size, child.attrib['name'], 'b'+(child.attrib['name'][1:]))
         
     return parameters
+
+
 
 def random_mini_batches(X, Y, mini_batch_size = 64, seed = 0):
     """
@@ -97,7 +100,7 @@ def conv_layer(A_p, W, B, strides=[1,1,1,1], padding="SAME", name="default", act
         tf.summary.histogram("biases", B)
         tf.summary.histogram("activations", act)
         #return tf.nn.max_pool(act, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding="SAME")
-    return act
+        return act
  
 
 
@@ -109,8 +112,7 @@ def fc_layer(A_p, output_num, activation_fn=None, name="default"):
     with tf.name_scope("fc_"+name):
         #fully connected part
         FC1 = tf.contrib.layers.fully_connected(A_p, ouput_num, activation_fn=activation_fn)
-        
-    return FC1
+        return FC1
 
 def max_pool(A_p, kernel, strides, padding="SAME", name="default"):
     """
@@ -120,4 +122,4 @@ def max_pool(A_p, kernel, strides, padding="SAME", name="default"):
     """
     with tf.name_scope("pool_"+name):
         P = tf.nn.max_pool(A_P, kernel, strides, padding=padding)
-    return P
+        return P
