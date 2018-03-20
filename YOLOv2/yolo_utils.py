@@ -100,7 +100,7 @@ def conv_layer(A_p, W, B, strides=[1,1,1,1], padding="SAME", name="default", act
         tf.summary.histogram("biases", B)
         tf.summary.histogram("activations", act)
         #return tf.nn.max_pool(act, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding="SAME")
-    return act
+        return act
  
 
 
@@ -112,8 +112,7 @@ def fc_layer(A_p, output_num, activation_fn=None, name="default"):
     with tf.name_scope("fc_"+name):
         #fully connected part
         FC1 = tf.contrib.layers.fully_connected(A_p, ouput_num, activation_fn=activation_fn)
-        
-    return FC1
+        return FC1
 
 def max_pool(A_p, kernel, strides, padding="SAME", name="default"):
     """
@@ -123,4 +122,4 @@ def max_pool(A_p, kernel, strides, padding="SAME", name="default"):
     """
     with tf.name_scope("pool_"+name):
         P = tf.nn.max_pool(A_P, kernel, strides, padding=padding)
-    return P
+        return P
