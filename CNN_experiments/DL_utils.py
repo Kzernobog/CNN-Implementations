@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 import tensorflow as tf
 import numpy as np
+import math
 
 
 def initialize_weights(xml_file):
@@ -30,7 +31,7 @@ def initialize_weights(xml_file):
         
         W = tf.get_variable(child.attrib['name'], size, initializer = tf.contrib.layers.xavier_initializer(seed = 0)) 
         parameters[child.attrib['name']] = W
-        B = tf.get_variable('b'+(child.attrib['name'][1:]), [size[-1],1], initializer = tf.zeros_initializer())
+        B = tf.get_variable('b'+(child.attrib['name'][1:]), [size[-1]], initializer = tf.zeros_initializer())
         parameters['b'+(child.attrib['name'][1:])] = B
         print(size, child.attrib['name'], 'b'+(child.attrib['name'][1:]))
         
@@ -57,20 +58,20 @@ def random_mini_batches(X, Y, mini_batch_size = 64, seed = 0):
     # Step 1: Shuffle (X, Y)
     permutation = list(np.random.permutation(m))
     shuffled_X = X[permutation,:,:,:]
-    shuffled_Y = Y[permutation,:]
+    shuffled_Y = Y[permutation]
 
     # Step 2: Partition (shuffled_X, shuffled_Y). Minus the end case.
     num_complete_minibatches = math.floor(m/mini_batch_size) # number of mini batches of size mini_batch_size in your partitionning
     for k in range(0, num_complete_minibatches):
         mini_batch_X = shuffled_X[k * mini_batch_size : k * mini_batch_size + mini_batch_size,:,:,:]
-        mini_batch_Y = shuffled_Y[k * mini_batch_size : k * mini_batch_size + mini_batch_size,:]
+        mini_batch_Y = shuffled_Y[k * mini_batch_size : k * mini_batch_size + mini_batch_size]
         mini_batch = (mini_batch_X, mini_batch_Y)
         mini_batches.append(mini_batch)
     
     # Handling the end case (last mini-batch < mini_batch_size)
     if m % mini_batch_size != 0:
         mini_batch_X = shuffled_X[num_complete_minibatches * mini_batch_size : m,:,:,:]
-        mini_batch_Y = shuffled_Y[num_complete_minibatches * mini_batch_size : m,:]
+        mini_batch_Y = shuffled_Y[num_complete_minibatches * mini_batch_size : m]
         mini_batch = (mini_batch_X, mini_batch_Y)
         mini_batches.append(mini_batch)
     
@@ -107,7 +108,7 @@ def fc_layer(A_p, output_num, activation_fn=None, name="default"):
     """
     with tf.name_scope("fc_"+name):
         #fully connected part
-        FC1 = tf.contrib.layers.fully_connected(A_p, ouput_num, activation_fn=activation_fn)
+        FC1 = tf.contrib.layers.fully_connected(A_p, output_num, activation_fn=activation_fn)
         return FC1
 
 def max_pool(A_p, kernel, strides, padding="SAME", name="default"):
@@ -117,7 +118,7 @@ def max_pool(A_p, kernel, strides, padding="SAME", name="default"):
     strides = strides of the pooling filter
     """
     with tf.name_scope("max_pool_"+name):
-        P = tf.nn.max_pool(A_P, kernel, strides, padding=padding)
+        P = tf.nn.max_pool(A_p, kernel, strides, padding=padding)
         return P
     
 def avg_pool(A_p, kernel, strides, padding='SAME', name='default'):
@@ -158,6 +159,17 @@ def inception_module(A_p, parameters, name='default'):
         A_p1x1 = conv_layer(P1, parameters['W_p1x1'], name='_p1x1')
         
         return rf.concat([A_1x1, A_3x3, A_5x5, A_p1x1], axis=3)
+    
+def accuracy(y_hat, y, data_use='train'):
+    '''
+    calculates the accuracy
+    '''
+    with tf.name_scope("accuracy_"+data_use):
+        predict_op = tf.argmax(y_hat, 1)
+        correct_prediction = tf.equal(predict_op, tf.argmax(y, 1))
+        accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+        tf.summary.scalar("accuracy_"+data_use, accuracy)
+        return accuracy
 
 def main():
     return None
